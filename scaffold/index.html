@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+    <script src="https://kit.fontawesome.com/860e7596f3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="audio-container">
+        <h1><b>Music Player</b></h1>
+
+        <div class="audio-img-wrapper">
+            <div class="audio-img">
+                <img src="" alt="" class="img" id="img">
+            </div>
+
+            <h1 class="audio-title" id="audio-title">Title of audio</h1>
+            <h2 class="audio-singer" id="audio-singer">Singer name</h2>
+        </div>
+
+        <div class="audio-progress">
+            <div class="current-time" id="current-time">00:00</div>
+            <div class="progress" id="progress">
+                <div class="progress-bar" id="progress-bar"></div>
+                <div class="progress-head" id="progress-head"></div>
+            </div>
+            <div class="duration" id="duration">00:00</div>
+        </div>
+
+        <div class="audio-btns">
+            <button onclick="backwards()" class="btn skip-back" id="skip-back">
+                <i class="fa-solid fa-backward-step"></i>
+            </button>
+
+            <button onclick="songPlay()" class="btn play" id="play">
+                <span> <i class="fa-solid fa-play"></i> </span>
+            </button>
+
+            <button onclick="forward()" class="btn skip-forward" id="skip-forward">
+                <i class="fa-solid fa-forward-step"></i>
+            </button>
+        </div>
+    </div>
+    <audio id="audio"></audio>
+    <script src="script.js"></script>
+</body>
+
+</html>
