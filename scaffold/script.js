@@ -10,7 +10,9 @@ forwardBtn = document.getElementById("skip-forward")
 progressBar = document.getElementById("progress-bar")
 progressHead = document.getElementById("progress-head")
 progress = document.getElementById("progress")
-
+likeBtn = document.getElementById("like")
+repeatBtn = document.getElementById("repeat")
+downloadBtn = document.getElementById("download")
 
 tracks = [
     {
@@ -103,6 +105,38 @@ function setSongPlayPoint(e) {
     const newTime = clickedPosition * audio.duration
     audio.currentTime = newTime
 }
+const likedSongs = []
 
+function popMsg(msg, iconClass) {
+    let msgPopup = document.getElementById("popupMessage")
+    if (!msgPopup) {
+        msgPopup = document.createElement('div')
+        msgPopup.id = 'popupMessage'
+        msgPopup.className = 'popup-msg'
+        document.body.appendChild(msgPopup)
+    }
+    msgPopup.innerHTML = `<i class="${iconClass}"></i>${msg}`
+    msgPopup.classList.add('show')
+
+    setTimeout(() => {
+        msgPopup.classList.add('hide')
+        setTimeout(() => {
+            msgPopup.classList.remove('show', 'hide')
+        }, 500)
+    }, 2000)
+
+}
+function liked_song() {
+    if (likedSongs.includes(tracks[currentsong].name)) {
+        likedSongs.splice(tracks[currentsong].name)
+        likeBtn.innerHTML = '<i class="fa-regular fa-heart"></i>'
+        popMsg(`${tracks[currentsong].name} removed from favourites`,'fa-solid fa-trash')
+    }
+    else {
+        likedSongs.push(tracks[currentsong].name)
+        likeBtn.innerHTML = '<i class="fa-solid fa-heart"></i>'
+        popMsg(`${tracks[currentsong].name} added to favourites`, 'fa-solid fa-circle-check')
+    }
+}
 
 

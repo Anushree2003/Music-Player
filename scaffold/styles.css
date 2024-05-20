@@ -24,11 +24,56 @@ body {
 }
 
 .audio-container {
+    margin-top: 50px;
     text-align: center;
     color: #8E3E63;
     text-transform: uppercase;
 }
 
+.fav {
+    padding: 5px;
+    margin-top: 10px;
+    display: flex;
+    gap: 150px;
+    justify-content: center;
+}
+
+.fav i {
+    font-size: 30px;
+}
+
+.i-btn {
+    border: none;
+    background: none;
+    color: #0C0C0C;
+}
+.popup-msg {
+    display: none;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #891652;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+.popup-msg.show {
+    display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+.popup-msg.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+}
+.popup-msg i{
+    font-size: 20px;
+    padding: 3px;
+}
 .audio-progress {
     display: flex;
     align-items: center;
@@ -92,6 +137,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #8E3E63;
 }
 
 .btn i,
