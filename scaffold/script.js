@@ -59,11 +59,21 @@ function songPlay() {
 }
 function backwards() {
     currentsong = (currentsong - 1 + tracks.length) % tracks.length
+    if (likedSongs.includes(tracks[currentsong].name)) {
+        likeBtn.innerHTML = '<i class="fa-solid fa-heart"></i>'
+    } else {
+        likeBtn.innerHTML = '<i class="fa-regular fa-heart"></i>'
+    }
     playsong(currentsong)
     songPlay()
 }
 function forward() {
     currentsong = (currentsong + 1) % tracks.length
+    if (likedSongs.includes(tracks[currentsong].name)) {
+        likeBtn.innerHTML = '<i class="fa-solid fa-heart"></i>'
+    } else {
+        likeBtn.innerHTML = '<i class="fa-regular fa-heart"></i>'
+    }
     playsong(currentsong)
     songPlay()
 }
@@ -130,7 +140,7 @@ function liked_song() {
     if (likedSongs.includes(tracks[currentsong].name)) {
         likedSongs.splice(tracks[currentsong].name)
         likeBtn.innerHTML = '<i class="fa-regular fa-heart"></i>'
-        popMsg(`${tracks[currentsong].name} removed from favourites`,'fa-solid fa-trash')
+        popMsg(`${tracks[currentsong].name} removed from favourites`, 'fa-solid fa-trash')
     }
     else {
         likedSongs.push(tracks[currentsong].name)
