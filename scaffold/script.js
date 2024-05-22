@@ -1,18 +1,22 @@
-audio = document.getElementById("audio")
-audioTitle = document.getElementById("audio-title")
-singerName = document.getElementById("audio-singer")
-imgSrc = document.getElementById("img")
-currentTime = document.getElementById("current-time")
-durationTime = document.getElementById("duration")
-skipBtn = document.getElementById("skip-back")
-playBtn = document.getElementById("play")
-forwardBtn = document.getElementById("skip-forward")
-progressBar = document.getElementById("progress-bar")
-progressHead = document.getElementById("progress-head")
-progress = document.getElementById("progress")
-likeBtn = document.getElementById("like")
-repeatBtn = document.getElementById("repeat")
-downloadBtn = document.getElementById("download")
+const audio = document.getElementById("audio")
+const audioTitle = document.getElementById("audio-title")
+const singerName = document.getElementById("audio-singer")
+const imgSrc = document.getElementById("img")
+const currentTime = document.getElementById("current-time")
+const durationTime = document.getElementById("duration")
+const skipBtn = document.getElementById("skip-back")
+const playBtn = document.getElementById("play")
+const forwardBtn = document.getElementById("skip-forward")
+const progressBar = document.getElementById("progress-bar")
+const progressHead = document.getElementById("progress-head")
+const progress = document.getElementById("progress")
+const likeBtn = document.getElementById("like")
+const repeatBtn = document.getElementById("repeat")
+const downloadBtn = document.getElementById("download")
+const playlistBtn = document.getElementById("playlistBtn")
+const likedPlaylist = document.getElementById("likedPlaylist")
+const showPlaylist = document.getElementById("playlist")
+
 
 tracks = [
     {
@@ -59,21 +63,13 @@ function songPlay() {
 }
 function backwards() {
     currentsong = (currentsong - 1 + tracks.length) % tracks.length
-    if (likedSongs.includes(tracks[currentsong].name)) {
-        likeBtn.innerHTML = '<i class="fa-solid fa-heart"></i>'
-    } else {
-        likeBtn.innerHTML = '<i class="fa-regular fa-heart"></i>'
-    }
+    updateLikeButton()
     playsong(currentsong)
     songPlay()
 }
 function forward() {
     currentsong = (currentsong + 1) % tracks.length
-    if (likedSongs.includes(tracks[currentsong].name)) {
-        likeBtn.innerHTML = '<i class="fa-solid fa-heart"></i>'
-    } else {
-        likeBtn.innerHTML = '<i class="fa-regular fa-heart"></i>'
-    }
+    updateLikeButton()
     playsong(currentsong)
     songPlay()
 }
@@ -115,7 +111,7 @@ function setSongPlayPoint(e) {
     const newTime = clickedPosition * audio.duration
     audio.currentTime = newTime
 }
-const likedSongs = []
+let likedSongs = []
 
 function popMsg(msg, iconClass) {
     let msgPopup = document.getElementById("popupMessage")
@@ -138,7 +134,7 @@ function popMsg(msg, iconClass) {
 }
 function liked_song() {
     if (likedSongs.includes(tracks[currentsong].name)) {
-        likedSongs.splice(tracks[currentsong].name)
+        likedSongs = likedSongs.filter(song => song !== tracks[currentsong].name)
         likeBtn.innerHTML = '<i class="fa-regular fa-heart"></i>'
         popMsg(`${tracks[currentsong].name} removed from favourites`, 'fa-solid fa-trash')
     }
@@ -147,6 +143,47 @@ function liked_song() {
         likeBtn.innerHTML = '<i class="fa-solid fa-heart"></i>'
         popMsg(`${tracks[currentsong].name} added to favourites`, 'fa-solid fa-circle-check')
     }
+    saveLikedSongs()
 }
 
+function updateLikeButton() {
+    if (likedSongs.includes(tracks[currentsong].name)) {
+        likeBtn.innerHTML = '<i class="fa-solid fa-heart"></i>'
+    } else {
+        likeBtn.innerHTML = '<i class="fa-regular fa-heart"></i>'
+    }
+}
 
+function loadLikedSongs() {
+    const storeLikeSong = localStorage.getItem('likedSongs')
+    if (storeLikeSong) {
+        likedSongs = JSON.parse(storeLikeSong)
+        updateLikeButton()
+    }
+}
+
+function saveLikedSongs() {
+    localStorage.setItem('likedSongs', JSON.stringify(likedSongs))
+}
+
+loadLikedSongs()
+
+imgSrc.addEventListener('click', function () {
+    songPlay()
+})
+
+function download_song() {
+    const songUrl = `songs/${tracks[currentsong].name}.mp3`
+    fetch(songUrl)
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${tracks[currentsong].name}.mp3`; 
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => console.error('Error downloading song:', error));
+}

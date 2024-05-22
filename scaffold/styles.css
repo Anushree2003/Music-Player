@@ -45,8 +45,17 @@ body {
 .i-btn {
     border: none;
     background: none;
-    color: #0C0C0C;
+    color: #543310;
 }
+
+.i-btn:hover {
+    cursor: pointer;
+}
+
+.likedPlaylist {
+    display: none;
+}
+
 .popup-msg {
     display: none;
     position: fixed;
@@ -61,19 +70,23 @@ body {
     z-index: 1000;
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
+
 .popup-msg.show {
     display: block;
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
+
 .popup-msg.hide {
     opacity: 0;
     transform: translateX(-50%) translateY(-20px);
 }
-.popup-msg i{
+
+.popup-msg i {
     font-size: 20px;
     padding: 3px;
 }
+
 .audio-progress {
     display: flex;
     align-items: center;
