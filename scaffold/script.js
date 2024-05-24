@@ -29,7 +29,7 @@ tracks = [
         name: "Love Me",
         artist: "Justin Bieber",
         cover: "images/loveme.jpg",
-        source: "songs/Love-Me.mp3",
+        source: "songs/Love Me.mp3",
     },
     {
         name: "Closer",
@@ -186,4 +186,29 @@ function download_song() {
             window.URL.revokeObjectURL(url);
         })
         .catch(error => console.error('Error downloading song:', error));
+}
+let flag = false
+
+function playNextSong(){
+    currentsong = (currentsong + 1) % tracks.length
+    playsong(currentsong)
+    songPlay()
+}
+
+function playRandomSong(){
+    randomIndex = Math.floor(Math.random()*tracks.length)
+    playsong(randomIndex)
+    console.log(randomIndex);
+    songPlay()
+}
+
+function shuffle_song(){
+    flag = !flag
+    if(flag){
+        repeatBtn.innerHTML = '<i class="fa-solid fa-shuffle"></i>'
+        playRandomSong()
+    }else{
+        repeatBtn.innerHTML = '<i class="fa-solid fa-repeat"></i>'
+        playNextSong()
+    }
 }

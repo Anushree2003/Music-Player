@@ -42,6 +42,10 @@ body {
     font-size: 30px;
 }
 
+.fav i:hover{
+    color: #74512D;
+}
+
 .i-btn {
     border: none;
     background: none;
