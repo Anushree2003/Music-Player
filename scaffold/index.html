@@ -42,8 +42,12 @@
             <button class="i-btn" id="playlistBtn" onclick="playlist_show()"><i class="fa-solid fa-bars"></i></i></button>
         </div>
 
-        <div id="likedPlaylist">
-            <ul id="playlist"></ul>
+        <div id="side-menu" class="side-menu">
+            <div class="menu">
+                <h2>Liked Songs</h2>
+                <button id="close" onclick="playlist_hide()">&times;</button>
+            </div>
+            <ul id="song-list"></ul>
         </div>
 
         <div class="audio-btns">

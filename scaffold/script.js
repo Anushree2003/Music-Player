@@ -16,7 +16,9 @@ const downloadBtn = document.getElementById("download")
 const playlistBtn = document.getElementById("playlistBtn")
 const likedPlaylist = document.getElementById("likedPlaylist")
 const showPlaylist = document.getElementById("playlist")
-
+const sideMenu = document.getElementById("side-menu")
+const songList = document.getElementById('song-list')
+const closeBtn = document.getElementById('close')
 
 tracks = [
     {
@@ -212,3 +214,18 @@ function shuffle_song(){
         playNextSong()
     }
 }
+
+function playlist_show(){
+    sideMenu.style.right = '0'
+}
+
+function playlist_hide(){
+    sideMenu.style.right = '-250px';
+}
+
+likedSongs.forEach(song => {
+    const songItem = document.createElement('li')
+    songItem.textContent = song
+    songList.appendChild(songItem)
+})
+    

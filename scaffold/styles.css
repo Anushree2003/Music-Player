@@ -45,7 +45,49 @@ body {
 .fav i:hover{
     color: #74512D;
 }
+.side-menu{
+    position: fixed;
+    top: 20px;
+    right: -250px;
+    width: 250px;
+    height: 450px;
+    background-color: #F7DED0;
+    box-shadow: 5px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
+.menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #FFE6E6;
+    color: #FFBE98;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 
+}
+.menu button{
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #FFBE98;
+    cursor: pointer;
+    
+}
+.side-menu ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+    text-align: left;
+    text-transform: capitalize;
+}
+.side-menu li{
+    padding: 10px;
+}
 .i-btn {
     border: none;
     background: none;
